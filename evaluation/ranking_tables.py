@@ -34,7 +34,7 @@ def print_dataframe(df, highlight_subset=None):
     print(style.to_latex(hrules=True, column_format='c' * df.shape[1], multicol_align='c'))
 
 
-dataset_ids = [814, 1510, 54, 1462, 20, 36, 182]
+dataset_ids = [814, 1063, 1510, 11, 1464, 37, 54, 1494, 1462, 1504, 20, 36, 182]
 dataset_columns = [str(x) for x in dataset_ids]
 
 methods = [
@@ -55,13 +55,6 @@ methods = [
     # 'optimal_2_1_500_descending',
     # 'optimal_2_1_1000_descending',
     # 'optimal_5_1_1000_descending',
-]
-
-methods = [
-    'optimal_2_1_200_ascending',
-    'optimal_2_1_500_ascending',
-    'optimal_2_1_1000_ascending',
-    'optimal_5_1_1000_ascending',
 ]
 
 # Create index
