@@ -1,0 +1,6 @@
+numpy
+matplotlib
+pandas
+scikit-learn
+scikit-activeml
+Jinja2
