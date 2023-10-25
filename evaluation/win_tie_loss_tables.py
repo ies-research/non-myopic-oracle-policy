@@ -6,7 +6,7 @@ from scipy.stats import wilcoxon
 
 from utils.evaluation import load_results
 
-dataset_ids = [814, 1510, 54, 1462, 20, 36, 182]
+dataset_ids = [814, 1510, 54, 1462, 20, 36, 182, 11, 37, 1063, 1464, 1494, 1504]
 
 # List of all selection strategies to be evaluated
 opt_methods = [
@@ -16,19 +16,17 @@ opt_methods = [
     'optimal_5_1_1000_ascending',
 ]
 
-selection_methods = ['mcpal', 'qbc', 'lc', 'rand', 'quire', 'discriminative', 'epis', 'simulated-annealing']
-selection_methods.append('simulated-annealing_2000_400')
+selection_methods = [
+    'mcpal', 'qbc', 'lc', 'rand', 'quire', 'discriminative', 'epis',
+    'simulated-annealing', 'simulated-annealing_2000_400'
+]
 
 names = {
     'optimal_greedy': 'greedy',
     'optimal_1_1_1000': 'opt 1/1000',
     'optimal_2_1_200_ascending': 'opt 2/200',
-    'optimal_2_1_500_ascending': 'opt 2/500',
     'optimal_4_1_250_ascending': 'opt 4/250',
     'optimal_5_1_1000_ascending': 'opt 5/1000',
-    'optimal_abs_std_2_1_50_ascending_false': 'cheap',
-    'optimal_abs_std_4_1_200_ascending_false': 'trade-off',
-    'optimal_abs_std_5_1_500_ascending_false': 'best',
     # Competitors
     'mcpal': 'PAL',
     'qbc': 'QBC',
@@ -41,7 +39,7 @@ names = {
     'simulated-annealing_2000_400': 'SA fast',
 }
 
-pval = .05
+pval = .05 / (len(selection_methods) * len(dataset_ids) * 2 - 6)
 
 results_path = "results/"
 results = load_results(results_path, dataset_ids, methods=opt_methods + selection_methods)
@@ -53,7 +51,7 @@ for opt_method in opt_methods:
         tie = 0
         loss = 0
         for ds_id in dataset_ids:
-            non_binary = [54, 20, 36, 182]
+            non_binary = [54, 20, 36, 182, 11]
             if selection_method == 'epis' and ds_id in non_binary:
                 continue
             x = np.nanmean(results[ds_id][selection_method]['test_error'], axis=1)
